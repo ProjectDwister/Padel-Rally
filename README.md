@@ -7,13 +7,17 @@ This is a static site with no build step — it loads React and Babel from a CDN
 ## Files
 
 ```
-index.html        the whole app
-manifest.json     makes it installable as an app
-sw.js             lets it keep working with a flaky courtside connection
-icons/            app icons at the sizes Android/iOS/desktop expect
+index.html                the whole app
+manifest.json              makes it installable as an app
+sw.js                       lets it keep working with a flaky courtside connection
+icon-192.png                 app icon
+icon-512.png                 app icon (larger)
+icon-maskable-192.png         app icon, Android adaptive-icon variant
+icon-maskable-512.png         app icon, Android adaptive-icon variant (larger)
+apple-touch-icon.png          app icon for iOS/Safari
 ```
 
-All five things need to be uploaded together, keeping this same folder structure — `manifest.json` and `sw.js` both reference the icons by relative path.
+All eight files sit flat, side by side — no subfolders needed.
 
 ## Run it locally
 
@@ -21,9 +25,9 @@ Open `index.html` in a browser. Note: the "install as an app" and offline-cachin
 
 ## Deploy to GitHub Pages
 
-1. Create a new GitHub repo.
-2. Add all five items above (`index.html`, `manifest.json`, `sw.js`, and the `icons/` folder with its contents), preserving the folder structure. On the repo's "Add file → Upload files" page, you can drag the whole `icons` folder in along with the other files and GitHub will preserve the structure — or use `git add . && git commit && git push` from the command line if you're comfortable with git, which is a bit more reliable for folders.
-3. Commit to the `main` branch.
+1. Create a new GitHub repo (or use an existing one for this project).
+2. Add all eight files above to it — GitHub's "Add file → Upload files" page accepts multiple files at once, just drag them all in together.
+3. Commit to the `main` branch. Uploading a file with a name that already exists updates it as a new commit, so re-uploading over a previous version works the same way.
 4. Go to **Settings → Pages**.
 5. Under "Build and deployment", set **Source: Deploy from a branch**, **Branch: main**, folder **/ (root)**.
 6. Save. GitHub will give you a URL like `https://yourusername.github.io/your-repo-name/` within a minute or two.
@@ -75,7 +79,7 @@ Every phone that opens the link after this is looking at the same tournament, li
 
 ## Editing
 
-Most of the app code lives in the `<script type="text/babel">` block in `index.html`. It's plain React (hooks + a reducer for state), no JSX build step required — edit and refresh. If you change the app's colors or name, update `manifest.json` and the icons in `icons/` to match, and bump `CACHE_NAME` in `sw.js` (e.g. `rally-cache-v2`) so returning visitors actually pick up the change instead of getting served their old cached copy.
+Most of the app code lives in the `<script type="text/babel">` block in `index.html`. It's plain React (hooks + a reducer for state), no JSX build step required — edit and refresh. If you change the app's colors or name, update `manifest.json` and the icon PNGs to match, and bump `CACHE_NAME` in `sw.js` (e.g. `rally-cache-v2`) so returning visitors actually pick up the change instead of getting served their old cached copy.
 
 ## Troubleshooting: blank page
 
