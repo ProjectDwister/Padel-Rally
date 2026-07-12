@@ -5,17 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
 <title>Rally — Padel Tournament Scorer</title>
 <meta name="description" content="Run a padel Americano or Mexicano tournament: build the draw, keep score courtside, track the leaderboard." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='28' height='28' rx='8' fill='%231451D6'/%3E%3Cpath d='M9 16 H23' stroke='%23FFFFFF' stroke-width='2' stroke-dasharray='2.5 2.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='9.5' r='3.4' fill='%23D7E62B'/%3E%3Ccircle cx='16' cy='22.5' r='3.4' fill='%23FFFFFF'/%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='28' height='28' rx='8' fill='%230F3D8C'/%3E%3Cpath d='M9 16 H23' stroke='%23FFFFFF' stroke-width='2' stroke-dasharray='2.5 2.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='9.5' r='3.4' fill='%23B8922B'/%3E%3Ccircle cx='16' cy='22.5' r='3.4' fill='%23FFFFFF'/%3E%3C/svg%3E" />
 
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- PWA: installable on Android (and elsewhere) as a standalone app -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0F3D8C" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.top-0{top:0}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-3{margin-top:.75rem;margin-bottom:.75rem}.-mt-4{margin-top:-1rem}.mb-0{margin-bottom:0}.mb-0\.5{margin-bottom:.125rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-2\.5{margin-bottom:.625rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-7{margin-bottom:1.75rem}.ml-1{margin-left:.25rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.block{display:block}.inline-block{display:inline-block}.inline{display:inline}.flex{display:flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-4{height:1rem}.h-5{height:1.25rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-9{height:2.25rem}.max-h-80{max-height:20rem}.w-10{width:2.5rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.space-y-0>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0px*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0px*var(--tw-space-y-reverse))}.space-y-0\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.125rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.125rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.p-2{padding:.5rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0{padding-top:0;padding-bottom:0}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-1{padding-bottom:.25rem}.pb-28{padding-bottom:7rem}.pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.align-middle{vertical-align:middle}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.capitalize{text-transform:capitalize}.leading-snug{line-height:1.375}.tracking-wider{letter-spacing:.05em}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:items-center{align-items:center}.sm\:pt-10{padding-top:2.5rem}}</style>
+
+<style>
+  #rally-boot-status { font-family: -apple-system, system-ui, sans-serif; max-width: 480px; margin: 48px auto; padding: 0 20px; color: #444; text-align: center; }
+  #rally-boot-status .err { color: #b3261e; font-size: 13px; white-space: pre-wrap; text-align: left; background: #fdecea; border-radius: 8px; padding: 12px; margin-top: 14px; }
+</style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root">
+  <div id="rally-boot-status">
+    <div style="font-weight:700; font-size:16px;">Loading Rally…</div>
+    <div style="font-size:13px; color:#888; margin-top:6px;">
+      Loads React and Babel from a CDN, so this page needs an internet
+      connection the first time. If this message doesn't go away, see the
+      error below, or try opening this file directly in a full browser tab
+      rather than an embedded preview.
+    </div>
+    <div id="rally-boot-errors"></div>
+  </div>
+</div>
+<noscript>This page needs JavaScript enabled to run.</noscript>
+
+<script>
+  window.__rallyMounted = false;
+  function rallyReportError(label) {
+    var box = document.getElementById("rally-boot-errors");
+    if (!box || window.__rallyMounted) return;
+    var line = document.createElement("div");
+    line.className = "err";
+    line.textContent = label;
+    box.appendChild(line);
+  }
+  window.addEventListener("error", function (e) {
+    if (window.__rallyMounted) return;
+    var msg = e && e.message ? e.message : "Unknown script error";
+    var src = e && e.filename ? " (" + e.filename.split("/").pop() + ")" : "";
+    rallyReportError("Script error: " + msg + src);
+  });
+  // Register the service worker for offline support. Non-blocking and
+  // silently skipped on browsers/contexts that don't support it (e.g.
+  // opening the file directly via file://, where service workers can't run).
+  if ("serviceWorker" in navigator && location.protocol !== "file:") {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {
+        // Offline caching just won't be available - the app still works fine online.
+      });
+    });
+  }
+</script>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js" onerror="rallyReportError('Failed to load React from unpkg.com - check your internet connection or try again.')"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" onerror="rallyReportError('Failed to load ReactDOM from unpkg.com - check your internet connection or try again.')"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js" onerror="rallyReportError('Failed to load Babel from unpkg.com - check your internet connection or try again.')"></script>
+
+<!-- Optional: only used for live multi-device sync if you fill in
+     FIREBASE_CONFIG below. Harmless to load even if you don't -
+     the app falls back to this browser's localStorage automatically. -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js" onerror="rallyReportError('Failed to load Firebase from gstatic.com - live sync will be unavailable, falling back to localStorage.')"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-database-compat.js" onerror="rallyReportError('Failed to load Firebase Database from gstatic.com - live sync will be unavailable, falling back to localStorage.')"></script>
 
 <script type="text/babel" data-presets="react">
-const { useEffect, useMemo, useReducer, useState } = React;
+/* ============================================================
+   LIVE SYNC SETUP — fill this in to sync one tournament live
+   across every courtside phone via Firebase Realtime Database.
+   Leave every value blank and Rally just uses this browser's
+   localStorage instead - nothing else to configure either way.
+   See README.md for the ~5 minute Firebase setup steps.
+   ============================================================ */
+
+const FIREBASE_CONFIG = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+};
+
+const STORAGE_KEY = "rally-tournament-v1";
+const FIREBASE_ENABLED = Boolean(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.databaseURL);
+
+let fbTournamentRef = null;
+if (FIREBASE_ENABLED && typeof firebase !== "undefined") {
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    fbTournamentRef = firebase.database().ref(STORAGE_KEY);
+  } catch (e) {
+    fbTournamentRef = null;
+  }
+}
+
+const { useEffect, useMemo, useReducer, useRef, useState } = React;
 
 /* ------------------------------------------------------------
    Minimal inline icon set (replaces lucide-react for a
@@ -156,25 +249,31 @@ const Loader2 = (p) => (
    ============================================================ */
 
 const GLOBAL_STYLES = `
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap');
-
 .rally-root {
-  --ink: #10192B;
-  --court-blue: #1451D6;
-  --court-blue-dark: #0A2E85;
-  --court-blue-mid: #1B44AE;
-  --court-blue-light: #EAF0FE;
-  --chalk: #F4F6F9;
+  --ink: #0B1220;
+  --court-blue: #0F3D8C;
+  --court-blue-deep: #071F4D;
+  --court-blue-mid: #1B4FA0;
+  --court-blue-light: #EEF2FA;
+  --chalk: #F6F5F1;
   --card: #FFFFFF;
-  --ball: #D7E62B;
-  --ball-dark: #8C9900;
-  --slate: #64748B;
-  --slate-light: #94A3B8;
-  --line: #E2E6EC;
-  --danger: #DC3B3B;
-  --danger-light: #FDEBEB;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ball: #B8922B;
+  --ball-dark: #7A5E1A;
+  --ball-light: #F7F0DC;
+  --slate: #555F78;
+  --slate-light: #97A0B5;
+  --line: rgba(11,18,32,0.10);
+  --line-strong: rgba(11,18,32,0.16);
+  --danger: #A3352B;
+  --danger-light: #FBECEA;
+  --shadow-sm: 0 1px 2px rgba(11,18,32,.05), 0 1px 1px rgba(11,18,32,.03);
+  --shadow-md: 0 10px 26px -8px rgba(11,18,32,.14), 0 2px 6px rgba(11,18,32,.05);
+  --shadow-lg: 0 24px 56px -16px rgba(11,18,32,.24), 0 4px 12px rgba(11,18,32,.08);
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
   background: var(--chalk);
+  background-image:
+    radial-gradient(1200px 480px at 50% -120px, rgba(15,61,140,0.05), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
   color: var(--ink);
   min-height: 100vh;
   width: 100%;
@@ -183,7 +282,7 @@ const GLOBAL_STYLES = `
 .rally-root * { box-sizing: border-box; }
 
 .rally-display {
-  font-family: 'Archivo Black', Impact, 'Inter', sans-serif;
+  font-family: 'Archivo Black', Impact, 'Archivo', sans-serif;
   letter-spacing: -0.01em;
 }
 
@@ -193,34 +292,44 @@ const GLOBAL_STYLES = `
 .rally-root input { font-family: inherit; }
 
 .rally-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
-.rally-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+.rally-scroll::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 4px; }
 
 .rally-card {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
 }
 
 .rally-court-card {
-  background: linear-gradient(160deg, var(--court-blue) 0%, var(--court-blue-dark) 100%);
+  background: linear-gradient(160deg, var(--court-blue-mid) 0%, var(--court-blue) 45%, var(--court-blue-deep) 100%);
   border-radius: 20px;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
 .rally-court-card::before {
   content: '';
   position: absolute;
   inset: 8px;
-  border: 1.5px solid rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.16);
   border-radius: 14px;
+  pointer-events: none;
+}
+
+.rally-court-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(130% 65% at 12% -15%, rgba(255,255,255,0.18), transparent 60%);
   pointer-events: none;
 }
 
 .rally-net-line {
   position: relative;
   height: 0;
-  border-top: 2px dashed rgba(255,255,255,0.5);
+  border-top: 2px dashed rgba(255,255,255,0.45);
   margin: 2px 22px;
 }
 .rally-net-line::before,
@@ -231,93 +340,110 @@ const GLOBAL_STYLES = `
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.8);
 }
 .rally-net-line::before { left: -4px; }
 .rally-net-line::after { right: -4px; }
 
-.rally-score-input {
+.rally-court-card .rally-score-input {
   width: 4.5rem;
   text-align: center;
   font-family: 'Archivo Black', Impact, sans-serif;
   font-size: 1.75rem;
   color: #FFFFFF;
-  background: rgba(255,255,255,0.14);
-  border: 1.5px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.16);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 12px;
   padding: 0.35rem 0.25rem;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.22), inset 0 -1px 0 rgba(255,255,255,0.05);
   -moz-appearance: textfield;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .rally-score-input::-webkit-outer-spin-button,
 .rally-score-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.rally-score-input::placeholder { color: rgba(255,255,255,0.45); }
-.rally-score-input:focus {
+.rally-score-input::placeholder { color: rgba(255,255,255,0.4); }
+.rally-court-card .rally-score-input:focus {
   outline: none;
   border-color: var(--ball);
-  background: rgba(255,255,255,0.22);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.22), 0 0 0 3px rgba(184,146,43,0.3);
 }
 
 .rally-winner-glow {
   color: var(--ball) !important;
+  transition: color 0.3s ease;
 }
 
 .rally-format-card {
-  border: 2px solid var(--line);
-  border-radius: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   background: var(--card);
-  transition: border-color 0.15s ease, transform 0.1s ease;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   text-align: left;
+  position: relative;
 }
-.rally-format-card:hover { border-color: var(--slate-light); }
+.rally-format-card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); }
 .rally-format-card.selected {
-  border-color: var(--court-blue);
-  background: var(--court-blue-light);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+.rally-format-card.selected::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 18px; right: 18px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--court-blue), var(--ball));
 }
 
 .rally-btn-primary {
   background: var(--ink);
   color: #FFFFFF;
   border-radius: 14px;
-  font-weight: 700;
-  transition: background 0.15s ease, transform 0.05s ease;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-md);
+  transition: background 0.2s ease, transform 0.08s ease, box-shadow 0.2s ease;
 }
-.rally-btn-primary:hover:not(:disabled) { background: var(--court-blue-dark); }
-.rally-btn-primary:active:not(:disabled) { transform: scale(0.98); }
-.rally-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.rally-btn-primary:hover:not(:disabled) { background: var(--court-blue-deep); box-shadow: var(--shadow-lg); }
+.rally-btn-primary:active:not(:disabled) { transform: scale(0.985); }
+.rally-btn-primary:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
 
 .rally-chip {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--card);
+  box-shadow: var(--shadow-sm);
 }
 
 .rally-tab-btn {
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--slate);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 .rally-tab-btn.active {
   background: var(--ink);
   color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
 }
 
 .rally-stepper-btn {
   border-radius: 10px;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--card);
   color: var(--ink);
-  transition: background 0.1s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.rally-stepper-btn:hover:not(:disabled) { background: var(--court-blue-light); border-color: var(--court-blue); }
-.rally-stepper-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.rally-stepper-btn:hover:not(:disabled) { border-color: var(--court-blue); background: var(--chalk); }
+.rally-stepper-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-.rally-fade-in { animation: rallyFadeIn 0.25s ease both; }
+.rally-fade-in { animation: rallyFadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 @keyframes rallyFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(3px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -788,13 +914,37 @@ function roundIsComplete(round) {
 }
 
 /* ============================================================
-   PERSISTENCE (browser localStorage — persists on this device/
-   browser only; see README for notes on multi-device sync)
+   PERSISTENCE — live sync across devices via Firebase Realtime
+   Database when FIREBASE_CONFIG (top of file) is filled in;
+   falls back automatically to this browser's localStorage
+   (single device) when it isn't. See README for the Firebase setup.
    ============================================================ */
 
-const STORAGE_KEY = "rally-tournament-v1";
+// Everything about tournament state EXCEPT score values - used to decide
+// when the whole-state sync needs to run. Scores are deliberately excluded
+// (they sync via their own granular path above), so two phones entering
+// different courts' scores at the same moment never fight over this.
+function structuralFingerprintOf(s) {
+  if (!s || typeof s !== "object") return "";
+  const rounds = Array.isArray(s.rounds) ? s.rounds : [];
+  return JSON.stringify({
+    stage: s.stage,
+    format: s.format,
+    numCourts: s.numCourts,
+    numRounds: s.numRounds,
+    roundsTouched: s.roundsTouched,
+    pointsTarget: s.pointsTarget,
+    mixedMode: s.mixedMode,
+    pairingRule: s.pairingRule,
+    players: s.players,
+    rounds: rounds.map((r) => ({
+      sittingOut: r && r.sittingOut,
+      courts: Array.isArray(r && r.courts) ? r.courts.map((c) => ({ court: c.court, teamA: c.teamA, teamB: c.teamB })) : [],
+    })),
+  });
+}
 
-async function loadTournament() {
+async function loadLocal() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
@@ -804,13 +954,28 @@ async function loadTournament() {
   }
 }
 
-async function saveTournament(state) {
+async function saveLocal(state) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     return true;
   } catch (e) {
     return false;
   }
+}
+
+// Scores are the one piece of state multiple courtside phones are likely to
+// edit at the very same moment (different courts, same round). Routing them
+// through a targeted Firebase path - instead of the general whole-tournament
+// sync below - means two courts' scores can never overwrite each other, no
+// matter how close together they're entered.
+const scoreSyncTimers = {};
+function syncScoreFieldToFirebase(roundIdx, courtIdx, field, value) {
+  if (!fbTournamentRef) return; // localStorage mode: the whole-state sync already covers this
+  const key = roundIdx + ":" + courtIdx + ":" + field;
+  if (scoreSyncTimers[key]) clearTimeout(scoreSyncTimers[key]);
+  scoreSyncTimers[key] = setTimeout(() => {
+    fbTournamentRef.child(`rounds/${roundIdx}/courts/${courtIdx}/${field}`).set(value === null ? null : value).catch(() => {});
+  }, 150);
 }
 
 /* ============================================================
@@ -1053,7 +1218,7 @@ function FormatCard({ selected, onSelect, icon, title, tagline, points }) {
    SETUP SCREEN
    ============================================================ */
 
-function SetupScreen({ state, dispatch, onGenerate }) {
+function SetupScreen({ state, dispatch, onGenerate, syncStatus }) {
   const { men, women, other } = useMemo(() => splitByGender(state.players), [state.players]);
   const genderReady = state.mixedMode ? Math.min(men.length, women.length) > 0 : true;
   const enoughPlayers = state.players.length >= 4;
@@ -1081,9 +1246,12 @@ function SetupScreen({ state, dispatch, onGenerate }) {
           Rally
         </div>
       </div>
-      <p className="text-sm mb-7" style={{ color: "var(--slate)" }}>
+      <p className="text-sm mb-2" style={{ color: "var(--slate)" }}>
         Set up a padel Americano or Mexicano, draw the rounds, and keep score from courtside.
       </p>
+      <div className="mb-7">
+        <SyncBadge status={syncStatus} />
+      </div>
 
       {/* Format */}
       <SectionLabel n={1} title="Format" />
@@ -1281,7 +1449,7 @@ function InlineNote({ icon, tone = "muted", children }) {
   const styles =
     tone === "warn"
       ? { background: "var(--danger-light)", color: "var(--danger)" }
-      : { background: "var(--court-blue-light)", color: "var(--court-blue-dark)" };
+      : { background: "var(--court-blue-light)", color: "var(--court-blue-deep)" };
   return (
     <div className="flex items-start gap-1.5 text-xs rounded-lg px-3 py-2 -mt-4 mb-7" style={styles}>
       <span className="mt-0.5 flex-shrink-0">{icon}</span>
@@ -1379,6 +1547,7 @@ function TeamLabel({ players, ids, winning, align = "left" }) {
             style={{
               color: winning ? "var(--ball)" : "#FFFFFF",
               justifyContent: align === "right" ? "flex-end" : "flex-start",
+              transition: "color 0.3s ease",
             }}
           >
             {align !== "right" && p ? <GenderDot gender={p.gender} /> : null}
@@ -1414,10 +1583,11 @@ function RoundBlock({ round, roundIndex, totalRounds, players, dispatch, expande
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-2 px-1"
+        className="w-full flex items-center justify-between py-2.5 px-1"
+        style={{ borderBottom: expanded ? "1px solid var(--line)" : "1px solid transparent" }}
       >
         <div className="flex items-center gap-2">
-          <span className="rally-display text-sm" style={{ color: "var(--ink)" }}>
+          <span className="rally-display text-base" style={{ color: "var(--ink)" }}>
             Round {roundIndex + 1}
           </span>
           <span className="text-xs" style={{ color: "var(--slate)" }}>
@@ -1437,18 +1607,19 @@ function RoundBlock({ round, roundIndex, totalRounds, players, dispatch, expande
 
       {expanded ? (
         <div className="rally-fade-in">
-          <div className="text-xs mb-3 px-1" style={{ color: "var(--slate)" }}>
+          <div className="text-xs mt-3 mb-3 px-1" style={{ color: "var(--slate)" }}>
             Playing to {pointsTarget} pts
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            {round.courts.map((court) => (
+            {round.courts.map((court, courtIdx) => (
               <CourtMatchCard
                 key={court.court}
                 court={court}
                 players={players}
-                onScoreChange={(field, value) =>
-                  dispatch({ type: "UPDATE_SCORE", roundIdx: roundIndex, court: court.court, field, value })
-                }
+                onScoreChange={(field, value) => {
+                  dispatch({ type: "UPDATE_SCORE", roundIdx: roundIndex, court: court.court, field, value });
+                  syncScoreFieldToFirebase(roundIndex, courtIdx, field, value);
+                }}
               />
             ))}
           </div>
@@ -1565,6 +1736,8 @@ function PlayScreen({ state, dispatch }) {
 function StandingsScreen({ state }) {
   const standings = useMemo(() => computeStandings(state.players, state.rounds), [state.players, state.rounds]);
   const anyPlayed = standings.some((s) => s.played > 0);
+  const leader = standings[0];
+  const rest = standings.slice(1);
 
   return (
     <div className="max-w-xl mx-auto px-4 pb-28 pt-4">
@@ -1579,34 +1752,66 @@ function StandingsScreen({ state }) {
           </p>
         </div>
       ) : (
-        <div className="rally-card divide-y" style={{ borderColor: "var(--line)" }}>
-          {standings.map((s, i) => (
-            <div key={s.id} className="flex items-center gap-3 px-4 py-3">
-              <div
-                className="rally-tabular text-sm font-bold w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{
-                  background: i === 0 ? "var(--ball)" : "var(--chalk)",
-                  color: i === 0 ? "var(--ink)" : "var(--slate)",
-                }}
-              >
-                {i === 0 ? <Crown size={14} /> : i + 1}
+        <>
+          <div
+            className="rally-card rally-fade-in flex items-center gap-3 px-4 py-4 mb-3"
+            style={{
+              background: "linear-gradient(155deg, var(--ball-light) 0%, var(--card) 65%)",
+              borderColor: "rgba(184,146,43,0.35)",
+            }}
+          >
+            <div
+              className="rounded-full flex items-center justify-center flex-shrink-0"
+              style={{ width: 44, height: 44, background: "var(--ball)", boxShadow: "var(--shadow-md)" }}
+            >
+              <Crown size={19} color="var(--ink)" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "var(--ball-dark)" }}>
+                In the lead
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="text-sm font-bold truncate flex items-center" style={{ color: "var(--ink)" }}>
-                  <GenderDot gender={s.gender} />
-                  <span className="truncate">{s.name && s.name.trim() ? s.name.trim() : `Player ${i + 1}`}</span>
-                </div>
-                <div className="rally-tabular text-xs" style={{ color: "var(--slate)" }}>
-                  {s.played} played · {s.diff >= 0 ? "+" : ""}
-                  {s.diff} diff · {s.wins}W
-                </div>
+              <div className="text-base font-bold truncate flex items-center" style={{ color: "var(--ink)" }}>
+                <GenderDot gender={leader.gender} />
+                <span className="truncate">{leader.name && leader.name.trim() ? leader.name.trim() : "Player 1"}</span>
               </div>
-              <div className="rally-tabular text-xl font-black flex-shrink-0" style={{ color: "var(--ink)", fontFamily: "'Archivo Black', sans-serif" }}>
-                {s.points}
+              <div className="rally-tabular text-xs mt-0.5" style={{ color: "var(--slate)" }}>
+                {leader.played} played · {leader.diff >= 0 ? "+" : ""}
+                {leader.diff} diff · {leader.wins}W
               </div>
             </div>
-          ))}
-        </div>
+            <div className="rally-display text-3xl flex-shrink-0" style={{ color: "var(--ink)" }}>
+              {leader.points}
+            </div>
+          </div>
+
+          {rest.length > 0 ? (
+            <div className="rally-card divide-y" style={{ borderColor: "var(--line)" }}>
+              {rest.map((s, i) => (
+                <div key={s.id} className="flex items-center gap-3 px-4 py-3">
+                  <div
+                    className="rally-tabular text-sm font-bold w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "var(--chalk)", color: "var(--slate)" }}
+                  >
+                    {i + 2}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-bold truncate flex items-center" style={{ color: "var(--ink)" }}>
+                      <GenderDot gender={s.gender} />
+                      <span className="truncate">{s.name && s.name.trim() ? s.name.trim() : `Player ${i + 2}`}</span>
+                    </div>
+                    <div className="rally-tabular text-xs" style={{ color: "var(--slate)" }}>
+                      {s.played} played · {s.diff >= 0 ? "+" : ""}
+                      {s.diff} diff · {s.wins}W
+                    </div>
+                  </div>
+                  <div className="rally-tabular text-xl font-black flex-shrink-0" style={{ color: "var(--ink)", fontFamily: "'Archivo Black', sans-serif" }}>
+                    {s.points}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </>
       )}
     </div>
   );
@@ -1628,7 +1833,26 @@ function TabButton({ active, onClick, children }) {
   );
 }
 
-function TopBar({ state, activeTab, setActiveTab, onResetClick }) {
+function SyncBadge({ status }) {
+  const map = {
+    live: { color: "#1DA34E", label: "Live" },
+    connecting: { color: "var(--slate-light)", label: "Connecting…" },
+    error: { color: "var(--danger)", label: "Sync error" },
+    local: { color: "var(--slate-light)", label: "This device" },
+  };
+  const cfg = map[status] || map.local;
+  return (
+    <span className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "var(--slate)" }} title={status === "local" ? "Not connected to live sync - saved in this browser only" : undefined}>
+      <span
+        className="rounded-full flex-shrink-0"
+        style={{ width: 7, height: 7, background: cfg.color }}
+      />
+      {cfg.label}
+    </span>
+  );
+}
+
+function TopBar({ state, activeTab, setActiveTab, onResetClick, syncStatus }) {
   const completed = state.rounds.filter(roundIsComplete).length;
   const totalRounds = state.format === "americano" ? state.rounds.length : state.numRounds;
   return (
@@ -1647,6 +1871,7 @@ function TopBar({ state, activeTab, setActiveTab, onResetClick }) {
           </span>
         </div>
         <div className="flex items-center gap-3">
+          <SyncBadge status={syncStatus} />
           <span className="rally-tabular text-xs font-semibold" style={{ color: "var(--slate)" }}>
             {completed}/{totalRounds} rounds
           </span>
@@ -1722,11 +1947,55 @@ function RallyApp() {
   const [loaded, setLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState("play");
   const [confirmReset, setConfirmReset] = useState(false);
+  const [syncStatus, setSyncStatus] = useState(fbTournamentRef ? "connecting" : "local");
+  // Tracks the last structural fingerprint we know Firebase already has -
+  // either because we just received it, or because we just wrote it
+  // ourselves. The save-effect only writes when the CURRENT fingerprint
+  // differs from this, which (unlike a one-shot "skip the next save" flag)
+  // stays correct no matter how local edits and incoming updates interleave.
+  const lastSyncedFingerprint = useRef(null);
+
+  const structuralFingerprint = useMemo(() => structuralFingerprintOf(state), [
+    state.stage,
+    state.format,
+    state.numCourts,
+    state.numRounds,
+    state.roundsTouched,
+    state.pointsTarget,
+    state.mixedMode,
+    state.pairingRule,
+    state.players,
+    state.rounds,
+  ]);
 
   useEffect(() => {
     let cancelled = false;
+
+    if (fbTournamentRef) {
+      const onValue = (snapshot) => {
+        if (cancelled) return;
+        const val = snapshot.val();
+        if (val && typeof val === "object") {
+          lastSyncedFingerprint.current = structuralFingerprintOf(val);
+          dispatch({ type: "HYDRATE", payload: val });
+        }
+        setSyncStatus("live");
+        setLoaded(true);
+      };
+      const onError = () => {
+        if (cancelled) return;
+        setSyncStatus("error");
+        setLoaded(true);
+      };
+      fbTournamentRef.on("value", onValue, onError);
+      return () => {
+        cancelled = true;
+        fbTournamentRef.off("value", onValue);
+      };
+    }
+
     (async () => {
-      const saved = await loadTournament();
+      const saved = await loadLocal();
       if (!cancelled) {
         if (saved && typeof saved === "object") dispatch({ type: "HYDRATE", payload: saved });
         setLoaded(true);
@@ -1739,11 +2008,17 @@ function RallyApp() {
 
   useEffect(() => {
     if (!loaded) return;
+    if (structuralFingerprint === lastSyncedFingerprint.current) return; // already matches Firebase
     const t = setTimeout(() => {
-      saveTournament(state);
-    }, 500);
+      lastSyncedFingerprint.current = structuralFingerprint;
+      if (fbTournamentRef) {
+        fbTournamentRef.set(state).catch(() => setSyncStatus("error"));
+      } else {
+        saveLocal(state);
+      }
+    }, 300);
     return () => clearTimeout(t);
-  }, [state, loaded]);
+  }, [structuralFingerprint, loaded]);
 
   const handleGenerate = () => {
     let rounds;
@@ -1777,11 +2052,11 @@ function RallyApp() {
       <style>{GLOBAL_STYLES}</style>
 
       {state.stage === "tournament" ? (
-        <TopBar state={state} activeTab={activeTab} setActiveTab={setActiveTab} onResetClick={() => setConfirmReset(true)} />
+        <TopBar state={state} activeTab={activeTab} setActiveTab={setActiveTab} onResetClick={() => setConfirmReset(true)} syncStatus={syncStatus} />
       ) : null}
 
       {state.stage === "setup" ? (
-        <SetupScreen state={state} dispatch={dispatch} onGenerate={handleGenerate} />
+        <SetupScreen state={state} dispatch={dispatch} onGenerate={handleGenerate} syncStatus={syncStatus} />
       ) : activeTab === "play" ? (
         <PlayScreen state={state} dispatch={dispatch} />
       ) : (
@@ -1791,7 +2066,11 @@ function RallyApp() {
       {confirmReset ? (
         <ConfirmModal
           title="Start a new tournament?"
-          body="This clears the current players, draw and scores saved in this browser."
+          body={
+            fbTournamentRef
+              ? "This clears the current players, draw and scores for everyone viewing this Rally board."
+              : "This clears the current players, draw and scores saved in this browser."
+          }
           onCancel={() => setConfirmReset(false)}
           onConfirm={handleConfirmReset}
         />
@@ -1803,6 +2082,7 @@ function RallyApp() {
 
 const rallyRootEl = document.getElementById("root");
 ReactDOM.createRoot(rallyRootEl).render(<RallyApp />);
+if (typeof window !== "undefined") window.__rallyMounted = true;
 </script>
 </body>
 </html>
